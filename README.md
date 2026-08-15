@@ -4,10 +4,7 @@
 
 <p align="center">
     <a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/packagist/v/artisan-toolbox/core.svg?style=flat-square" alt="Packagist"></a>
-    <a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/packagist/php-v/artisan-toolbox/core.svg?style=flat-square" alt="PHP from Packagist"></a>
-    <a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://badge.laravel.cloud/badge/artisan-toolbox/core?style=flat" alt="Laravel versions"></a>
     <a href="https://github.com/artisan-toolbox/core/actions"><img alt="GitHub Workflow Status (main)" src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=main&label=Tests&style=flat-square"></a>
-    <a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/packagist/dt/artisan-toolbox/core.svg?style=flat-square" alt="Total Downloads"></a>
 </p>
 
 ArtisanToolbox Core provides shared foundations, contracts, utilities, and common components for all ArtisanToolbox packages.
