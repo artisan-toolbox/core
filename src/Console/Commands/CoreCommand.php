@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace ArtisanToolbox\Core\Console\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
-#[\Illuminate\Console\Attributes\Description('Placeholder Artisan command shipped by the package core.')]
-#[\Illuminate\Console\Attributes\Signature('core:placeholder')]
+#[Description('Placeholder Artisan command shipped by the package core.')]
+#[Signature('core:placeholder')]
 class CoreCommand extends Command
 {
     /**
