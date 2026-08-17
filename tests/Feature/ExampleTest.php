@@ -5,11 +5,11 @@ declare(strict_types=1);
 use ArtisanToolbox\Core\Core;
 
 it('resolves the singleton', function () {
-    expect(app(Core::class))->toBeInstanceOf(Core::class);
+    expect(resolve(Core::class))->toBeInstanceOf(Core::class);
 });
 
 it('returns the same instance from the container', function () {
-    expect(app(Core::class))->toBe(app(Core::class));
+    expect(resolve(Core::class))->toBe(resolve(Core::class));
 });
 
 it('merges the package config', function () {

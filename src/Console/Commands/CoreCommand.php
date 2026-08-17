@@ -6,18 +6,10 @@ namespace ArtisanToolbox\Core\Console\Commands;
 
 use Illuminate\Console\Command;
 
+#[\Illuminate\Console\Attributes\Description('Placeholder Artisan command shipped by the package core.')]
+#[\Illuminate\Console\Attributes\Signature('core:placeholder')]
 class CoreCommand extends Command
 {
-    /**
-     * The command signature.
-     */
-    protected $signature = 'core:placeholder';
-
-    /**
-     * The command description.
-     */
-    protected $description = 'Placeholder Artisan command shipped by the package core.';
-
     /**
      * Execute the console command.
      */
