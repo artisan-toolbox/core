@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ArtisanToolbox\Core\Middleware;
+namespace ArtisanToolbox\Core\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

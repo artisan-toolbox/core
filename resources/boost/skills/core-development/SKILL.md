@@ -1,7 +1,7 @@
 ---
 name: core-development
 description: >
-  Configure and apply the Artisan Toolbox Core package in Laravel applications.
+  Apply Artisan Toolbox Core translated model attributes and cross-domain Inertia middleware in Laravel applications.
 license: MIT
 metadata:
   author: Allan Mariucci Carvalho
@@ -13,7 +13,7 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 
 ## Primary Goal
 
-- apply the `artisan-toolbox/core` package's public API in the smallest correct way
+- apply the `artisan-toolbox/core` package's public APIs in the smallest correct way
 
 ## Workflow
 
@@ -22,20 +22,46 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 - confirm the app is a Laravel project
 - inspect the target code paths where the package should be applied
 
-### 2. Apply the package's public API
+### 2. Translate stored Eloquent attribute keys
 
-Document how to integrate Artisan Toolbox Core here, replacing this placeholder with the integration steps for your package.
+- use `ArtisanToolbox\Core\Casts\Translated` in the model's `casts()` method
+- store a Laravel translation key such as `plans.starter`, not its translated display value
+- query and persist using the untranslated key; attribute reads and serialization use the current application locale
+- keep translation values scalar strings because the cast rejects translation groups that resolve to arrays
+
+### 3. Handle cross-domain Inertia visits
+
+- prepend `ArtisanToolbox\Core\Http\Middleware\HandleInertiaCrossDomainVisits` to the application's `web` middleware group when one Inertia application serves multiple trusted hosts
+- configure CORS for the exact trusted origins and expose `x-inertia` and `x-inertia-location`
+- do not register the middleware for applications that do not perform cross-host Inertia navigation
 
 ## Rules, References, and Templates
 
 Read before executing:
 
-- no additional resource files for this skill
+- `https://artisantoolbox.wsssoftware.com.br/packages/core/translated-attributes/`
+- `https://artisantoolbox.wsssoftware.com.br/packages/core/multi-domain-inertia/`
 
-## Examples
+## Example
 
-- describe a representative integration scenario for Artisan Toolbox Core
+```php
+use ArtisanToolbox\Core\Casts\Translated;
+use Illuminate\Database\Eloquent\Model;
+
+class Plan extends Model
+{
+    protected function casts(): array
+    {
+        return [
+            'label' => Translated::class,
+        ];
+    }
+}
+```
 
 ## Anti-patterns
 
-- do not document package internals here; keep the skill focused on adoption in Laravel apps
+- do not store translated display values when a stable translation key is available
+- do not query a cast attribute using its translated value
+- do not use the translated string cast for user-authored multilingual content
+- do not apply cross-domain middleware without configuring the corresponding trusted CORS origins

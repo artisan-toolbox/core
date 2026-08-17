@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use ArtisanToolbox\Core\Middleware\HandleInertiaCrossDomainVisits;
+use ArtisanToolbox\Core\Http\Middleware\HandleInertiaCrossDomainVisits;
 use Illuminate\Support\Facades\Route;
 
 beforeEach(function () {
