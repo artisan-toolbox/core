@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace ArtisanToolbox\Core;
 
 use ArtisanToolbox\Core\Console\Commands\CoreCommand;
+use ArtisanToolbox\Core\Support\Sifter;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
@@ -24,6 +28,16 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Arr::macro('sift', fn (iterable $items): array => Sifter::toArray($items));
+
+        Collection::macro('sift', function (): Collection {
+            return Sifter::collection($this);
+        });
+
+        LazyCollection::macro('sift', function (): LazyCollection {
+            return Sifter::lazyCollection($this);
+        });
+
         $this->loadRoutesFrom(__DIR__.'/../routes/core.php');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'core');

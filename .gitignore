@@ -10,3 +10,5 @@ composer.lock
 .idea
 .vscode
 maintainer_secrets.json
+config/maintainer.php
+config/maintainer_secrets.php

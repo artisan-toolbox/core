@@ -46,6 +46,7 @@
 
 ## [Unreleased](https://github.com/artisan-toolbox/core/compare/v0.1.0...1.x)
 
+- Add `sift()` macros for `Arr`, `Collection`, and `LazyCollection`, plus the namespaced `sift_when()` helper, for lazily building conditional iterables without mutating their sources.
 - Add the `Translated` Eloquent cast for resolving stored strings with the current application locale.
 - Add `HandleInertiaCrossDomainVisits` for navigation between trusted hosts served by the same Inertia application.
 - Require PHP 8.5 or later, Laravel 13, and Pest 5.

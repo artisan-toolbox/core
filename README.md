@@ -25,6 +25,25 @@ Most applications receive Core through another Artisan Toolbox package. When usi
 php artisan vendor:publish --tag="core"
 ```
 
+## Usage
+
+Build arrays with conditionally included values using the `Arr::sift()` macro and namespaced `sift_when()` helper:
+
+```php
+use Illuminate\Support\Arr;
+
+use function ArtisanToolbox\Core\sift_when;
+
+$payload = Arr::sift([
+    'name' => $user->name,
+    'email' => sift_when($canViewEmail, fn (): string => $user->email),
+]);
+```
+
+The macro is also available as `$collection->sift()` and `$lazyCollection->sift()`, returning new instances without mutating or eagerly consuming their sources.
+
+See the [conditional arrays documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/conditional-arrays/) for recursive iterable behavior and key-preservation details.
+
 ## Resources
 
 - [Documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/)
