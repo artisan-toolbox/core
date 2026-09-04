@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.1.0] - 2026-09-04
+
+### Features
+
+- **Add conditional sift macros and sift_when helper** (`e7c7865`)
+  Introduces a new conditional iterable building feature centered on `sift()` macros and a `sift_when()` helper.
+
+What changed:
+- Adds a new internal marker/sentinel mechanism:
+  - New `ArtisanToolbox\Core\Support\SiftMarker` singleton used to mark values for exclusion.
+  - New `ArtisanToolbox\Core\Support\Sifter` utility implementing the recursive “sift” logic:
+    - `toArray(iterable)` filters out `SiftMarker` instances and recursively transforms nested arrays/collections/lazy collections/traversables.
+    - `collection(Collection)` and `lazyCollection(LazyCollection)` return filtered/mapped new instances with recursive handling.
+- Registers new public Laravel macros in `CoreServiceProvider::boot()`:
+  - `Illuminate\Support\Arr::sift()` => returns `Sifter::toArray($items)`.
+  - `Illuminate\Support\Collection::sift()` => returns `Sifter::collection($this)`.
+  - `Illuminate\Support\LazyCollection::sift()` => returns `Sifter::lazyCollection($this)`.
+- Adds a new global helper file autoloaded by Composer:
+  - `src/helpers.php` is added to `autoload.files` so the global helper `ArtisanToolbox\Core\sift_when(bool $condition, mixed $value): mixed` is available at Composer autoload time.
+  - `sift_when(false, ...)` returns `SiftMarker::instance()` so values are excluded by `Arr::sift`/`Collection::sift`/`LazyCollection::sift`.
+  - `sift_when(true, $value)` returns `$value` directly; if `$value` is a `Closure`, it is only executed when the condition is true.
+
+Documentation and developer workflow:
+- Updates `CHANGELOG.md` and `README.md` with usage examples showing how to combine `Arr::sift()` / `Collection->sift()` / `LazyCollection->sift()` with `ArtisanToolbox\Core\sift_when()` to lazily build conditional arrays/iterables without mutating sources.
+- Updates the core development skills guide (`resources/boost/.../SKILL.md`) with a new step explaining conditional array building and key/type preservation.
+- Updates library version constant: `Core::VERSION` is bumped from `1.0.0` to `1.1.0`.
+
+Why it matters / user impact:
+- Enables expressive, conditional construction of arrays/collections/lazy collections that:
+  - Exclude values marked by `sift_when(false, ...)`.
+  - Preserve keys for sifted iterables.
+  - Avoid eager evaluation by supporting lazy iteration and closure short-circuiting.
+  - Recursively sifts nested supported iterable types (arrays, `Collection`, `LazyCollection`, and other traversables).
+
+Compatibility / migration notes:
+- Macro registration may conflict with other packages that already define `sift` macros on `Arr`, `Collection`, or `LazyCollection` (Laravel macro behavior determines whether this overwrites/overlaps).
+- Any consumers relying on `Core::VERSION` string checks will now see `1.1.0`.
+- Adds `src/helpers.php` to Composer `autoload.files`, introducing global helper availability via autoload side effects; if that file defines functions/constants in an unexpected way for your environment, it could affect runtime.
+- Project configuration/workflow changes are also included in this release cycle:
+  - `.gitignore` now ignores `config/maintainer.php` and `config/maintainer_secrets.php` (may affect developer workflows expecting to commit those files).
+
+Tests:
+- Adds `tests/Feature/ArrSiftTest.php` verifying macro registration, conditional inclusion/exclusion, closure evaluation only when conditions are true, recursive marker discarding across supported nested iterables (including generators), key preservation, non-mutation behavior for `Collection->sift()`, and lazy/non-consuming behavior for `LazyCollection->sift()`/`Arr::sift()` until iteration.
+
+### Maintenance
+
+- **Add configDirectories to PHPStan configDirectories** (`4b6742e`)
+  Updates phpstan.neon.dist to add a `parameters.configDirectories` entry pointing at `config`, allowing PHPStan to load additional PHPStan configuration fragments from that directory (while keeping `config` in the existing `paths`). This impacts the way PHPStan aggregates/merges configuration sources, which can change analysis results if new config fragments exist under `config`. No runtime code paths, public APIs, or commands are changed; this is strictly a static analysis configuration/workflow improvement.
+
 ## [1.0.0] - 2026-08-18
 
 ### Features
