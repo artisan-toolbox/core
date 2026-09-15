@@ -28,6 +28,7 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 - wrap conditional values with `sift_when($condition, $value)` and pass the complete iterable to `Illuminate\Support\Arr::sift()`, or call `sift()` on a Collection or LazyCollection
 - use a closure as the second argument when its value is expensive and should only be resolved after the condition passes
 - expect arrays and Collections to retain their types and keys, and LazyCollections to remain lazy
+- remember that a passing condition invokes the closure at the `sift_when()` call; an ordinary array is built eagerly, while a LazyCollection generator runs during iteration
 
 ### 3. Translate stored Eloquent attribute keys
 
@@ -81,6 +82,7 @@ class Plan extends Model
 ## Anti-patterns
 
 - do not evaluate expensive conditional values before passing them to `sift_when()`; pass a closure instead
+- do not pass a `sift_when(false, ...)` result to the client without calling `sift()` on the enclosing iterable
 - do not mutate a source Collection after calling `sift()` and expect the already returned Collection to change
 - do not store translated display values when a stable translation key is available
 - do not query a cast attribute using its translated value

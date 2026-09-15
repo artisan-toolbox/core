@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Documentation
+
+- Make the Sift guide visible in the documentation sidebar and clarify when conditional closures run, how nested generators behave, and why numeric keys are preserved.
+
 ## [1.1.0] - 2026-09-04
 
 ### Features
@@ -17,13 +23,13 @@ What changed:
   - `Illuminate\Support\Arr::sift()` => returns `Sifter::toArray($items)`.
   - `Illuminate\Support\Collection::sift()` => returns `Sifter::collection($this)`.
   - `Illuminate\Support\LazyCollection::sift()` => returns `Sifter::lazyCollection($this)`.
-- Adds a new global helper file autoloaded by Composer:
-  - `src/helpers.php` is added to `autoload.files` so the global helper `ArtisanToolbox\Core\sift_when(bool $condition, mixed $value): mixed` is available at Composer autoload time.
+- Adds a new helper file autoloaded by Composer:
+  - `src/helpers.php` is added to `autoload.files` so the namespaced helper `ArtisanToolbox\Core\sift_when(bool $condition, mixed $value): mixed` is available at Composer autoload time.
   - `sift_when(false, ...)` returns `SiftMarker::instance()` so values are excluded by `Arr::sift`/`Collection::sift`/`LazyCollection::sift`.
-  - `sift_when(true, $value)` returns `$value` directly; if `$value` is a `Closure`, it is only executed when the condition is true.
+  - `sift_when(true, $value)` returns `$value` directly; if `$value` is a `Closure`, it is executed immediately when the helper is called.
 
 Documentation and developer workflow:
-- Updates `CHANGELOG.md` and `README.md` with usage examples showing how to combine `Arr::sift()` / `Collection->sift()` / `LazyCollection->sift()` with `ArtisanToolbox\Core\sift_when()` to lazily build conditional arrays/iterables without mutating sources.
+- Updates `CHANGELOG.md` and `README.md` with usage examples showing how to combine `Arr::sift()` / `Collection->sift()` / `LazyCollection->sift()` with `ArtisanToolbox\Core\sift_when()` to build conditional arrays and lazy iterables without mutating sources.
 - Updates the core development skills guide (`resources/boost/.../SKILL.md`) with a new step explaining conditional array building and key/type preservation.
 - Updates library version constant: `Core::VERSION` is bumped from `1.0.0` to `1.1.0`.
 
@@ -31,18 +37,18 @@ Why it matters / user impact:
 - Enables expressive, conditional construction of arrays/collections/lazy collections that:
   - Exclude values marked by `sift_when(false, ...)`.
   - Preserve keys for sifted iterables.
-  - Avoid eager evaluation by supporting lazy iteration and closure short-circuiting.
+  - Skip closures when their condition is false; closures with a true condition run immediately when the helper is called. LazyCollection sources remain lazy until iterated.
   - Recursively sifts nested supported iterable types (arrays, `Collection`, `LazyCollection`, and other traversables).
 
 Compatibility / migration notes:
 - Macro registration may conflict with other packages that already define `sift` macros on `Arr`, `Collection`, or `LazyCollection` (Laravel macro behavior determines whether this overwrites/overlaps).
 - Any consumers relying on `Core::VERSION` string checks will now see `1.1.0`.
-- Adds `src/helpers.php` to Composer `autoload.files`, introducing global helper availability via autoload side effects; if that file defines functions/constants in an unexpected way for your environment, it could affect runtime.
+- Adds `src/helpers.php` to Composer `autoload.files`, making the namespaced helper available when Composer loads the package.
 - Project configuration/workflow changes are also included in this release cycle:
   - `.gitignore` now ignores `config/maintainer.php` and `config/maintainer_secrets.php` (may affect developer workflows expecting to commit those files).
 
 Tests:
-- Adds `tests/Feature/ArrSiftTest.php` verifying macro registration, conditional inclusion/exclusion, closure evaluation only when conditions are true, recursive marker discarding across supported nested iterables (including generators), key preservation, non-mutation behavior for `Collection->sift()`, and lazy/non-consuming behavior for `LazyCollection->sift()`/`Arr::sift()` until iteration.
+- Adds `tests/Feature/ArrSiftTest.php` verifying macro registration, conditional inclusion/exclusion, closure evaluation only when conditions are true, recursive marker discarding across supported nested iterables (including generators), key preservation, non-mutation behavior for `Collection->sift()`, and lazy behavior for `LazyCollection->sift()` and nested iterables.
 
 ### Maintenance
 
@@ -90,16 +96,3 @@ Tests:
 
 - **Initial commit** (`3058079`)
   Includes the changes introduced by commit 3058079: Initial commit.
-
-# Release Notes
-
-## [Unreleased](https://github.com/artisan-toolbox/core/compare/v0.1.0...1.x)
-
-- Add `sift()` macros for `Arr`, `Collection`, and `LazyCollection`, plus the namespaced `sift_when()` helper, for lazily building conditional iterables without mutating their sources.
-- Add the `Translated` Eloquent cast for resolving stored strings with the current application locale.
-- Add `HandleInertiaCrossDomainVisits` for navigation between trusted hosts served by the same Inertia application.
-- Require PHP 8.5 or later, Laravel 13, and Pest 5.
-
-## [v0.1.0](https://github.com/artisan-toolbox/core/compare/...v0.1.0) - 202x-xx-xx
-
-Initial pre-release.

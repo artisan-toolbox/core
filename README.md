@@ -9,21 +9,13 @@
 
 Artisan Toolbox Core provides shared foundations, contracts, utilities, and common components for Artisan Toolbox packages.
 
-## Documentation
-
-The complete installation, resource publishing, and compatibility documentation is available at [artisantoolbox.wsssoftware.com.br/packages/core](https://artisantoolbox.wsssoftware.com.br/packages/core/).
-
 ## Installation
 
 ```bash
 composer require artisan-toolbox/core
 ```
 
-Most applications receive Core through another Artisan Toolbox package. When using it directly, publish its resources with:
-
-```bash
-php artisan vendor:publish --tag="core"
-```
+Requires PHP 8.5 and Laravel 13. Most applications receive Core through another Artisan Toolbox package.
 
 ## Usage
 
@@ -40,9 +32,7 @@ $payload = Arr::sift([
 ]);
 ```
 
-The macro is also available as `$collection->sift()` and `$lazyCollection->sift()`, returning new instances without mutating or eagerly consuming their sources.
-
-See the [conditional arrays documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/conditional-arrays/) for recursive iterable behavior and key-preservation details.
+The [complete documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/) covers Sift's timing and nested iterable behavior, translated attributes, multi-domain Inertia visits, and published resources.
 
 ## Resources
 
