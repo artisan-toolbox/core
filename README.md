@@ -1,13 +1,19 @@
-<div align="center">
+<!-- MAINTAINER:README_HEAD:START -->
+<div id="maintainer-title" align="center">
+    <img src="logo/core-icon.svg" alt="" width="88">
     <h1>Artisan Toolbox Core</h1>
 </div>
 
-<p align="center">
-    <a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/packagist/v/artisan-toolbox/core.svg?style=flat-square" alt="Packagist"></a>
-    <a href="https://github.com/artisan-toolbox/core/actions"><img alt="GitHub Workflow Status (1.x)" src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=1.x&label=Tests&style=flat-square"></a>
+<p id="maintainer-badges" align="center">
+<a href="https://github.com/artisan-toolbox/core/releases"><img src="https://img.shields.io/badge/version-1.1.0-blue?style=flat-square" alt="version"></a>
+<a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/packagist/v/artisan-toolbox/core.svg?style=flat-square" alt="Packagist"></a>
+<a href="https://github.com/artisan-toolbox/core/actions"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
 </p>
 
-Artisan Toolbox Core provides shared foundations, contracts, utilities, and common components for Artisan Toolbox packages.
+<p id="maintainer-description" align="center">
+    Shared foundations, contracts, utilities, and common components for Artisan Toolbox packages.
+</p>
+<!-- MAINTAINER:README_HEAD:END -->
 
 ## Installation
 
@@ -15,7 +21,7 @@ Artisan Toolbox Core provides shared foundations, contracts, utilities, and comm
 composer require artisan-toolbox/core
 ```
 
-Requires PHP 8.5 and Laravel 13. Most applications receive Core through another Artisan Toolbox package.
+Requires PHP 8.5, Laravel 13, and Inertia Laravel 3.x. Most applications receive Core through another Artisan Toolbox package.
 
 ## Usage
 

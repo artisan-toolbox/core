@@ -2,8 +2,13 @@
 
 ## Unreleased
 
+### Fixes
+
+- Install Maintainer as a runtime dependency so consumers can resolve the Core service without installing development dependencies.
+
 ### Documentation
 
+- Add the Core logo and manage the README header with Maintainer.
 - Make the Sift guide visible in the documentation sidebar and clarify when conditional closures run, how nested generators behave, and why numeric keys are preserved.
 
 ## [1.1.0] - 2026-09-04
