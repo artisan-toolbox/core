@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.2.0] - 2026-11-04
+
+### Fixes
+
+- **Add Maintainer as runtime dependency and manage README head** (`7f3d2e9`)
+  Introduces `artisan-toolbox/maintainer` as a required runtime dependency (moved from dev-only usage to `require`), so consumers can resolve the Core service without needing development dependencies. Also updates README header management so the README head metadata is controlled programmatically (including the new badge/header structure). Why it matters: production installs that previously lacked dev dependencies now have the needed contracts available, preventing resolution failures in consumer environments. User impact: production footprint may slightly increase, and installations must satisfy the newer dependency constraints. Migration/compatibility: ensure your deployment environment is compatible with the updated `artisan-toolbox/maintainer` version constraints now required at runtime.
+
+### Documentation
+
+- **Clarify sift_when closure timing and update sidebar** (`edad839`)
+  Expands and clarifies the documentation for `sift_when` behavior—specifically when closures execute—along with terminology and guidance updates in the documentation navigation/sidebar. This includes clarifications about conditional execution timing so readers understand what runs when `sift_when()` is called versus when iteration occurs (e.g., differences between eager arrays and lazy generators). User impact: documentation only; no code/runtime behavior is changed. Compatibility/migration: none required, but readers should adjust expectations based on the clarified closure-timing guidance.
+
+### Code Style
+
+- **Standardize README badges and update header badges** (`4e9cbe0`)
+  Updates the README badge formatting and the header badge presentation to a consistent, standardized layout. This improves visual clarity and ensures the badge set remains aligned with the project’s branding/metadata expectations. User impact is limited to documentation appearance; no runtime behavior or APIs are changed. Compatibility/migration: none required.
+
+### Maintenance
+
+- **Bump artisan-toolbox maintainer maintainer and simplify rector sets** (`855c423`)
+  Adjusts tooling/dependency maintenance by bumping the `artisan-toolbox/maintainer` maintainer tooling reference and simplifying Rector configuration sets. This is intended to keep the development/tooling ecosystem current and reduce or streamline which Rector sets are applied. User impact is indirect (developer workflow/tooling quality); no package runtime APIs are intended to change. Compatibility/migration: none for end users; developers may see different Rector set coverage when running refactors.
+
 ## Unreleased
 
 ### Fixes
