@@ -19,16 +19,30 @@ class Core implements Versionable, WithReadmeHead
             ->withLogo(src: 'logo/core-icon.svg', alt: '', width: 88)
             ->withTitle('Artisan Toolbox Core')
             ->withDescription('Shared foundations, contracts, utilities, and common components for Artisan Toolbox packages.')
-            ->addBadge(Badge::releaseVersion('https://github.com/artisan-toolbox/core/releases'))
             ->addBadge(Badge::make(
-                link: 'https://packagist.org/packages/artisan-toolbox/core',
-                imgSrc: 'https://img.shields.io/packagist/v/artisan-toolbox/core.svg?style=flat-square',
-                imgAlt: 'Packagist',
+                link: 'https://github.com/artisan-toolbox/core/releases',
+                imgSrc: 'https://img.shields.io/github/v/release/artisan-toolbox/core?label=Release&style=flat-square',
+                imgAlt: 'Release',
             ))
             ->addBadge(Badge::make(
-                link: 'https://github.com/artisan-toolbox/core/actions',
+                link: 'https://artisantoolbox.wsssoftware.com.br/packages/core/#requirements',
+                imgSrc: 'https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square',
+                imgAlt: 'PHP',
+            ))
+            ->addBadge(Badge::make(
+                link: 'https://artisantoolbox.wsssoftware.com.br/packages/core/#requirements',
+                imgSrc: 'https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square',
+                imgAlt: 'Laravel',
+            ))
+            ->addBadge(Badge::make(
+                link: 'https://github.com/artisan-toolbox/core/actions/workflows/tests.yml?query=branch%3A1.x',
                 imgSrc: 'https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=1.x&label=Tests&style=flat-square',
                 imgAlt: 'Tests',
+            ))
+            ->addBadge(Badge::make(
+                link: 'https://artisantoolbox.wsssoftware.com.br/packages/core/',
+                imgSrc: 'https://img.shields.io/badge/Docs-Read-blue?style=flat-square',
+                imgAlt: 'Docs',
             ));
     }
 }

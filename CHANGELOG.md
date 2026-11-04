@@ -8,6 +8,7 @@
 
 ### Documentation
 
+- Standardize README badges for release status, compatibility, CI, and documentation.
 - Add the Core logo and manage the README header with Maintainer.
 - Make the Sift guide visible in the documentation sidebar and clarify when conditional closures run, how nested generators behave, and why numeric keys are preserved.
 
