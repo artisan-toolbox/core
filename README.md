@@ -6,10 +6,10 @@
 
 <p id="maintainer-badges" align="center">
 <a href="https://github.com/artisan-toolbox/core/releases"><img src="https://img.shields.io/github/v/release/artisan-toolbox/core?label=Release&amp;style=flat-square" alt="Release"></a>
-<a href="https://artisantoolbox.wsssoftware.com.br/packages/core/#requirements"><img src="https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square" alt="PHP"></a>
-<a href="https://artisantoolbox.wsssoftware.com.br/packages/core/#requirements"><img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square" alt="Laravel"></a>
+<a href="https://atb.dev.br/packages/core/#requirements"><img src="https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square" alt="PHP"></a>
+<a href="https://atb.dev.br/packages/core/#requirements"><img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square" alt="Laravel"></a>
 <a href="https://github.com/artisan-toolbox/core/actions/workflows/tests.yml?query=branch%3A1.x"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
-<a href="https://artisantoolbox.wsssoftware.com.br/packages/core/"><img src="https://img.shields.io/badge/Docs-Read-blue?style=flat-square" alt="Docs"></a>
+<a href="https://atb.dev.br/packages/core/"><img src="https://img.shields.io/badge/Docs-Read-blue?style=flat-square" alt="Docs"></a>
 </p>
 
 <p id="maintainer-description" align="center">
@@ -40,11 +40,11 @@ $payload = Arr::sift([
 ]);
 ```
 
-The [complete documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/) covers Sift's timing and nested iterable behavior, translated attributes, multi-domain Inertia visits, and published resources.
+The [complete documentation](https://atb.dev.br/packages/core/) covers Sift's timing and nested iterable behavior, translated attributes, multi-domain Inertia visits, and published resources.
 
 ## Resources
 
-- [Documentation](https://artisantoolbox.wsssoftware.com.br/packages/core/)
+- [Documentation](https://atb.dev.br/packages/core/)
 - [Changelog](CHANGELOG.md)
 - [Contributing](.github/CONTRIBUTING.md)
 - [Security policy](.github/SECURITY.md)

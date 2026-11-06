@@ -47,9 +47,9 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 
 Read before executing:
 
-- `https://artisantoolbox.wsssoftware.com.br/packages/core/conditional-arrays/`
-- `https://artisantoolbox.wsssoftware.com.br/packages/core/translated-attributes/`
-- `https://artisantoolbox.wsssoftware.com.br/packages/core/multi-domain-inertia/`
+- `https://atb.dev.br/packages/core/conditional-arrays/`
+- `https://atb.dev.br/packages/core/translated-attributes/`
+- `https://atb.dev.br/packages/core/multi-domain-inertia/`
 
 ## Example
 
