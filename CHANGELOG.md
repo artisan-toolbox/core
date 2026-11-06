@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1] - 2026-11-06
+
+### Maintenance
+
+- **Update package links and contact email** (`7f7000e`)
+  Updates repository documentation/contact information by changing the security reporting contact email to the new address (`contact@atb.dev.br`) and aligning package/documentation links to the new `https://atb.dev.br/...` domain. This is documentation-only (no runtime/API behavior changes), but it can impact users or tooling that rely on the old email or link destinations (e.g., docs/badge link consumers or users bookmarking the previous domain). No migration is required for code, though users may want to update any hardcoded references to the old domain/email.
+
+- **Merge dependabot GitHub Actions update** (`ccbee01`)
+  Merges a Dependabot pull request updating the GitHub Actions workflow’s pinned PHP setup action revision (specifically the `shivammathur/setup-php` step). This affects CI only by changing the underlying action revision used to install/setup PHP during workflow runs. There are no changes to application code or API surface; compatibility impact is limited to the CI environment used for tests/builds.
+
+- **Bump shivammathur/setup-php from 2.37.2 to 2.40.0** (`59f31e2`)
+  Updates the GitHub Actions workflow dependency `shivammathur/setup-php` from version 2.37.2 to 2.40.0 (still within the same major/v2 line). This modifies CI behavior only by using the newer action implementation for provisioning PHP in the “Setup PHP” step. This does not change project runtime code, but it may affect CI execution details (e.g., how PHP is downloaded/configured) and therefore could influence the test/build environment without requiring any application migration.
+
 ## [Unreleased]
 
 ### Documentation
