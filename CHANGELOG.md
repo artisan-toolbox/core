@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0] - 2026-11-18
+
+### Documentation
+
+- **Self-contain Boost conditional payload example with prerequisites** (`b33e210`)
+  Updated `CHANGELOG.md` (under `Unreleased`) and the Boost skill documentation to make the “conditional payload example” self-contained. The documentation now explicitly states the Laravel and PHP prerequisites needed to understand and use the example. This is documentation-only: no code behavior, API surface, configuration keys, or commands were changed, so there are no runtime compatibility impacts. The change primarily improves clarity for users following the example and reduces the likelihood of setup confusion.
+
+- **Clarify core-development instructions and refine PHP example payload** (`b33e210`)
+  Refreshed `SKILL.md` documentation for core development with clearer setup expectations and a more explicit example. Step 1 now instructs confirming the application uses PHP 8.5 and Laravel 13, and it adds guidance to run `composer require artisan-toolbox/core` from the application root if Core is missing. The PHP example payload was adjusted to use `name` as the literal `'Ada'` (instead of `$user->name`), and to change the `email` example to use `sift_when(false, ...)` with a closure returning `'ada@example.com'`. The documentation explicitly notes the resulting payload is `['name' => 'Ada']` and that the email closure remains unevaluated. This does not alter any implementation or configuration behavior—only how the example and prerequisites are documented, improving correctness and reducing confusion for readers.
+
+### Build
+
+- **Bump Core reported version to 1.3.0** (`b33e210`)
+  Updated the `Core::VERSION` constant in `src/Core.php` from `1.2.1` to `1.3.0`. This change only affects the reported/library version value; no other behavior or public APIs are modified in this fragment. User impact is limited to version identification (e.g., diagnostic/version checks). Any breaking implications would depend on additional release changes outside this specific fragment, but within this fragment compatibility is not altered beyond the version string.
+
 ## [1.2.1] - 2026-11-06
 
 ### Maintenance
