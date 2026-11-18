@@ -15,6 +15,8 @@
 
 ## [Unreleased]
 
+- Make the Boost skill’s conditional payload example self-contained and state its Laravel and PHP prerequisites.
+
 ### Documentation
 
 - Update documentation links and managed README badges to `https://atb.dev.br`, and use `contact@atb.dev.br` for public package contact metadata.

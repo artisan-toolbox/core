@@ -19,7 +19,7 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 
 ### 1. Inspect the Laravel app context
 
-- confirm the app is a Laravel project
+- confirm the app uses PHP 8.5 and Laravel 13. If Core is missing, run `composer require artisan-toolbox/core` from the application root
 - inspect the target code paths where the package should be applied
 
 ### 2. Build conditional arrays
@@ -59,10 +59,12 @@ use Illuminate\Support\Arr;
 use function ArtisanToolbox\Core\sift_when;
 
 $payload = Arr::sift([
-    'name' => $user->name,
-    'email' => sift_when($canViewEmail, fn (): string => $user->email),
+    'name' => 'Ada',
+    'email' => sift_when(false, fn (): string => 'ada@example.com'),
 ]);
 ```
+
+The payload is `['name' => 'Ada']`. The email closure stays unevaluated.
 
 ```php
 use ArtisanToolbox\Core\Casts\Translated;
