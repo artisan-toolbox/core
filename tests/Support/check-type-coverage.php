@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
 
@@ -54,7 +54,7 @@ try {
 
     $exitCode = 1;
 } finally {
-    File::delete($report);
+    new Filesystem()->delete($report);
 }
 
 exit($exitCode);
