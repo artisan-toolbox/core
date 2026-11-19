@@ -5,7 +5,8 @@
 </div>
 
 <p id="maintainer-badges" align="center">
-<a href="https://github.com/artisan-toolbox/core/releases"><img src="https://img.shields.io/github/v/release/artisan-toolbox/core?label=Release&amp;style=flat-square" alt="Release"></a>
+<a href="https://github.com/artisan-toolbox/core/releases"><img src="https://img.shields.io/badge/version-1.3.0-blue?style=flat-square" alt="version"></a>
+<a href="https://packagist.org/packages/artisan-toolbox/core"><img src="https://img.shields.io/badge/Packagist-F28D1A?style=flat-square&amp;logo=packagist&amp;logoColor=white" alt="Packagist"></a>
 <a href="https://atb.dev.br/packages/core/#requirements"><img src="https://img.shields.io/badge/PHP-%5E8.5-777BB4?style=flat-square" alt="PHP"></a>
 <a href="https://atb.dev.br/packages/core/#requirements"><img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square" alt="Laravel"></a>
 <a href="https://github.com/artisan-toolbox/core/actions/workflows/tests.yml?query=branch%3A1.x"><img src="https://img.shields.io/github/actions/workflow/status/artisan-toolbox/core/tests.yml?branch=1.x&amp;label=Tests&amp;style=flat-square" alt="Tests"></a>
@@ -23,7 +24,7 @@
 composer require artisan-toolbox/core
 ```
 
-Requires PHP 8.5, Laravel 13, and Inertia Laravel 3.x. Most applications receive Core through another Artisan Toolbox package.
+Most applications receive Core through another Artisan Toolbox package. Check the [requirements](https://atb.dev.br/packages/core/#requirements) before installing Core directly.
 
 ## Usage
 

@@ -19,10 +19,11 @@ class Core implements Versionable, WithReadmeHead
             ->withLogo(src: 'logo/core-icon.svg', alt: '', width: 88)
             ->withTitle('Artisan Toolbox Core')
             ->withDescription('Shared foundations, contracts, utilities, and common components for Artisan Toolbox packages.')
+            ->addBadge(Badge::releaseVersion('https://github.com/artisan-toolbox/core/releases'))
             ->addBadge(Badge::make(
-                link: 'https://github.com/artisan-toolbox/core/releases',
-                imgSrc: 'https://img.shields.io/github/v/release/artisan-toolbox/core?label=Release&style=flat-square',
-                imgAlt: 'Release',
+                link: 'https://packagist.org/packages/artisan-toolbox/core',
+                imgSrc: 'https://img.shields.io/badge/Packagist-F28D1A?style=flat-square&logo=packagist&logoColor=white',
+                imgAlt: 'Packagist',
             ))
             ->addBadge(Badge::make(
                 link: 'https://atb.dev.br/packages/core/#requirements',
