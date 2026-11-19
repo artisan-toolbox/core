@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.4.0] - 2026-11-19
+
+### Features
+
+- **Update README badges and requirements note** (`c7871d9`)
+  Refreshes README visuals and installation guidance. Specifically, updates GitHub badges and adjusts the README requirements text to include a clearer note about required versions/requirements by directing readers to the existing requirements section (via the current requirements link) rather than repeating explicit version constraints in the intro. User impact: documentation-only improvements; no runtime or config behavior changes.
+
+### Fixes
+
+- **Remove temp type coverage report without bootstrapping** (`f416849`)
+  Eliminates the temporary type coverage report generation that previously required bootstrapping a Laravel application. This reduces CI/test complexity and improves reliability by ensuring type coverage checks run without spinning up the framework. User impact is limited to the test/quality pipeline: developers will see type-coverage failures without the added bootstrap overhead. No production APIs or configuration changes are implied by this commit.
+
+### Maintenance
+
+- **Stabilize CI matrix and add distribution smoke test** (`cc64f81`)
+  Updates the GitHub Actions workflow (`.github/workflows/tests.yml`) to improve CI stability and coverage of distribution artifacts. Key changes:
+- Adds `workflow_dispatch` to allow manual triggering.
+- Sets job `timeout-minutes` to 20.
+- Changes strategy `fail-fast` from `true` to `false` so one failing matrix entry does not abort others.
+- Disables checkout credential persistence (`actions/checkout` with `persist-credentials: false`) for better security.
+- Bumps `shivammathur/setup-php` to v2.40.0 while keeping the same PHP matrix.
+- Refactors Composer setup into clearer steps: (1) require `laravel/framework` and `orchestra/testbench` per matrix, (2) run `composer update` at the selected stability, (3) run `composer run prepare`.
+- Adds a Linux-only distribution smoke test (`composer test:distribution`) when `matrix.stability == 'prefer-stable'`, validating that the packaged/distribution build can be installed and used.
+Compatibility/migration: No user-facing API changes, but CI behavior changes may affect developer workflows (e.g., failures are less likely to abort the whole matrix, and a new distribution install test runs under the specified stability condition).
+
 ## [1.3.0] - 2026-11-18
 
 ### Documentation
