@@ -30,6 +30,8 @@
 
 ## [Unreleased]
 
+- Run each GitHub Actions matrix entry independently and report Composer setup failures in separate steps.
+- Fail the type coverage check when Pest omits a source file. Verify that a clean Laravel 13 application discovers Core and receives the Boost skill from the package archive.
 - Make the Boost skill’s conditional payload example self-contained and state its Laravel and PHP prerequisites.
 
 ### Documentation
