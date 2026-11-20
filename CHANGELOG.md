@@ -67,6 +67,10 @@ Compatibility/migration: No user-facing API changes, but CI behavior changes may
 
 ## [Unreleased]
 
+- Test PHP 8.5 and 8.6 in CI with the Maintainer 1.14.4 setup action.
+
+- Pin the Maintainer CI action and Composer constraint to 1.14.3. Run the short Pest suite serially by default and allow two workers on Unix.
+
 - Require Maintainer 1.14.2. Use its root GitHub Action to set up PHP and Composer, validate the manifest, and resolve dependencies with download caching. Run PHPStan, Pint, and Pest through Maintainer's strict quality check in `composer test` and GitHub Actions. The workflow preserves the run for each pushed commit so Maintainer can verify the exact release commit.
 - Require Larastan 3.12.1 or later in the 3.x series for development. Its PHPStan requirement includes the Turbo PHPDoc fix on every operating system.
 - Run each GitHub Actions matrix entry independently and report Composer setup failures in separate steps.
