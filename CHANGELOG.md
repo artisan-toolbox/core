@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.1] - 2026-11-20
+
+### Features
+
+- **Configure Maintainer AI models and locales** (`20091f8`)
+  Set separate AI models for commit messages, release type suggestions, release notes, and changelog updates. All four default to `gpt-6.2-sol` and can be overridden with `MAINTAINER_AI_COMMIT_MESSAGE_MODEL`, `MAINTAINER_AI_RELEASE_TYPE_SUGGESTION_MODEL`, `MAINTAINER_AI_RELEASE_NOTES_MODEL`, and `MAINTAINER_AI_RELEASE_CHANGELOG_UPDATE_MODEL`, respectively. Configure the local feedback language with `MAINTAINER_AI_LOCAL_FEEDBACK_LOCALE`, which is unset by default, and the project language with `MAINTAINER_AI_PROJECT_LOCALE`, which defaults to `en`. The default fix pipeline now runs Rector followed by Pint and no longer runs the Vite Plus fix step. The default test pipeline now runs PHPStan, Pint, and Pest, without Vite Plus checks, Vite Plus tests, or Vue type checking. Workflows that still need the removed checks must run them separately. Pest runs in parallel by default on non-Windows platforms and serially on Windows; set `MAINTAINER_PEST_PARALLEL=false` to keep serial execution on non-Windows platforms.
+
+### Continuous Integration
+
+- **Standardize CI setup and quality checks with Maintainer** (`8336453`)
+  Includes the changes introduced by commit 8336453: ci: Standardize CI setup and quality checks with Maintainer.
+
 ## [1.4.0] - 2026-11-19
 
 ### Features
