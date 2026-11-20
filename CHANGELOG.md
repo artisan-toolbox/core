@@ -55,6 +55,8 @@ Compatibility/migration: No user-facing API changes, but CI behavior changes may
 
 ## [Unreleased]
 
+- Require Maintainer 1.14.2. Use its root GitHub Action to set up PHP and Composer, validate the manifest, and resolve dependencies with download caching. Run PHPStan, Pint, and Pest through Maintainer's strict quality check in `composer test` and GitHub Actions. The workflow preserves the run for each pushed commit so Maintainer can verify the exact release commit.
+- Require Larastan 3.12.1 or later in the 3.x series for development. Its PHPStan requirement includes the Turbo PHPDoc fix on every operating system.
 - Run each GitHub Actions matrix entry independently and report Composer setup failures in separate steps.
 - Fail the type coverage check when Pest omits a source file. Verify that a clean Laravel 13 application discovers Core and receives the Boost skill from the package archive.
 - Remove the temporary type coverage report without bootstrapping a Laravel application.

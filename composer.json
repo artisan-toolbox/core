@@ -18,13 +18,13 @@
     ],
     "require": {
         "php": "^8.5",
-        "artisan-toolbox/maintainer": "^1.14.0",
+        "artisan-toolbox/maintainer": "^1.14.2",
         "illuminate/support": "^13.0",
         "inertiajs/inertia-laravel": "^3.0"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.5",
-        "larastan/larastan": "^3.9",
+        "larastan/larastan": "^3.12.1",
         "laravel/pint": "^1.29",
         "laravel/pao": "^1.0",
         "orchestra/testbench": "^11.0",
@@ -75,6 +75,9 @@
         "analyse": [
             "vendor/bin/phpstan analyse --memory-limit=2G"
         ],
+        "quality:check": [
+            "@php vendor/bin/maintainer quality:check --no-interaction --strict"
+        ],
         "test:types": [
             "@php tests/Support/check-type-coverage.php"
         ],
@@ -85,10 +88,8 @@
             "@php tests/Distribution/check-installation.php"
         ],
         "test": [
-            "@analyse",
-            "@lint:check",
-            "@test:types",
-            "@test:unit"
+            "@quality:check",
+            "@test:types"
         ],
         "clear": [
             "@php vendor/bin/testbench package:purge-skeleton --ansi"

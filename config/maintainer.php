@@ -5,10 +5,6 @@ use ArtisanToolbox\Maintainer\Quality\Contracts\RunsPhpStanCheck;
 use ArtisanToolbox\Maintainer\Quality\Contracts\RunsPintCheck;
 use ArtisanToolbox\Maintainer\Quality\Contracts\RunsPintFix;
 use ArtisanToolbox\Maintainer\Quality\Contracts\RunsRectorFix;
-use ArtisanToolbox\Maintainer\Quality\Contracts\RunsVitePlusCheck;
-use ArtisanToolbox\Maintainer\Quality\Contracts\RunsVitePlusCheckFix;
-use ArtisanToolbox\Maintainer\Quality\Contracts\RunsVitePlusTest;
-use ArtisanToolbox\Maintainer\Quality\Contracts\RunsVueTscCheck;
 
 return [
     'ai' => [
@@ -39,18 +35,14 @@ return [
         'fix' => [
             RunsRectorFix::class,
             RunsPintFix::class,
-            RunsVitePlusCheckFix::class,
         ],
         'test' => [
-            RunsPestCheck::class,
-            RunsPintCheck::class,
-            RunsVitePlusCheck::class,
-            RunsVitePlusTest::class,
-            RunsVueTscCheck::class,
             RunsPhpStanCheck::class,
+            RunsPintCheck::class,
+            RunsPestCheck::class,
         ],
         'pest' => [
-            'parallel' => env('MAINTAINER_PEST_PARALLEL', false),
+            'parallel' => env('MAINTAINER_PEST_PARALLEL', PHP_OS_FAMILY !== 'Windows'),
         ],
         'phpstan' => [
             'memory_limit' => env('MAINTAINER_PHPSTAN_MEMORY_LIMIT', '2G'),
