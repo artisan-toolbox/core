@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2] - 2026-11-20
+
+### Continuous Integration
+
+- **Test Core on PHP 8.6** (`c6d535b`)
+  Add PHP 8.6 to the CI matrix alongside PHP 8.5. Both versions are tested on Ubuntu and Windows with Composer’s prefer-lowest and prefer-stable dependency resolution. Update the pinned artisan-toolbox/maintainer CI setup action from 1.14.2 to 1.14.4. This expands compatibility coverage without changing Core’s PHP requirement or requiring users to migrate.
+
 ## [1.4.1] - 2026-11-20
 
 ### Features
