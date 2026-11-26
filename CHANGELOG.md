@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Features
+
+- Add Brazilian document and phone value objects for parsing, validation, masking, and test data generation. Documents support CPF and both numeric and alphanumeric CNPJ. Phone types follow the Front Awesome Brazilian mask templates. Laravel rules accept any supported type or a selection of enum cases.
+
 ## [1.4.2] - 2026-11-20
 
 ### Continuous Integration

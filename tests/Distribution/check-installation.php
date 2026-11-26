@@ -48,6 +48,14 @@ try {
     ], $application, ['COMPOSER_HOME' => $directory.'/composer'], timeout: 240)->mustRun($streamOutput);
 
     new Process([PHP_BINARY, '-r', <<<'PHP'
+        use ArtisanToolbox\Core\Brasilian\Document;
+        use ArtisanToolbox\Core\Brasilian\DocumentType;
+        use ArtisanToolbox\Core\Brasilian\Phone;
+        use ArtisanToolbox\Core\Brasilian\PhoneType;
+        use ArtisanToolbox\Core\Brasilian\Rules\DocumentRule;
+        use ArtisanToolbox\Core\Brasilian\Rules\PhoneRule;
+        use Illuminate\Support\Facades\Validator;
+
         require 'vendor/autoload.php';
         $app = Illuminate\Foundation\Application::configure(getcwd())->create();
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
@@ -69,6 +77,31 @@ try {
             exit(1);
         }
 
+        $validation = Validator::make([
+            'tax_id' => '12.abc.345/01de-35',
+            'phone' => '(11) 98765-4321',
+        ], [
+            'tax_id' => ['required', new DocumentRule(DocumentType::Cnpj)],
+            'phone' => ['required', new PhoneRule(PhoneType::RegionalLandline, PhoneType::RegionalMobile)],
+        ]);
+
+        if (! $validation->passes()
+            || Document::from('12.abc.345/01de-35')->unmask() !== '12ABC34501DE35'
+            || Phone::from('11987654321')->mask() !== '(11) 98765-4321'
+        ) {
+            fwrite(STDERR, "The installed Core package could not validate and format Brazilian values.\n");
+
+            exit(1);
+        }
+
+        $invalid = Validator::make(['tax_id' => '12ABC34501DE36'], ['tax_id' => [new DocumentRule]]);
+
+        if ($invalid->errors()->first('tax_id') !== 'The tax id must be a valid Brazilian document.') {
+            fwrite(STDERR, "The installed Core package did not report an invalid CNPJ with its validation message.\n");
+
+            exit(1);
+        }
+
         $installed = Composer\InstalledVersions::getInstallPath('artisan-toolbox/core');
 
         if (! is_file($installed.'/resources/boost/skills/core-development/SKILL.md')) {
@@ -77,7 +110,7 @@ try {
             exit(1);
         }
 
-        echo "Laravel discovered Core. Arr::sift returned the expected payload and the Boost skill is installed.\n";
+        echo "Laravel discovered Core. Sift, Brazilian values, and the bundled Boost skill are available.\n";
         PHP], $application)->mustRun($streamOutput);
 } finally {
     $files->deleteDirectory($directory);

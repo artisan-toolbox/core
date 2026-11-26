@@ -1,7 +1,7 @@
 ---
 name: core-development
 description: >
-  Apply Artisan Toolbox Core conditional arrays, translated model attributes, and cross-domain Inertia middleware in Laravel applications.
+  Apply Artisan Toolbox Core conditional arrays, translated model attributes, cross-domain Inertia middleware, and Brazilian CPF, CNPJ, and phone validation in Laravel applications.
 license: MIT
 metadata:
   author: Allan Mariucci Carvalho
@@ -43,6 +43,16 @@ Use this skill when a Laravel application needs to integrate the Artisan Toolbox
 - configure CORS for the exact trusted origins and expose `x-inertia` and `x-inertia-location`
 - do not register the middleware for applications that do not perform cross-host Inertia navigation
 
+### 5. Validate Brazilian documents and phone numbers
+
+- check that the installed Core build contains the `ArtisanToolbox\Core\Brasilian` APIs. They are available in the development preview
+- import `DocumentRule` and `PhoneRule` from `ArtisanToolbox\Core\Brasilian\Rules`
+- use `DocumentRule` with `DocumentType::Cpf` or `DocumentType::Cnpj`. The CNPJ case covers both numeric and alphanumeric values
+- use `PhoneRule` with `PhoneType` cases that match the formats the form accepts. Use `RegionalLandline` or `RegionalMobile` to require a DDD
+- pass one or several enum cases to a rule, or omit them to accept every supported type. Use Laravel's `required` or `nullable` for presence
+- parse the validated string with `Document::from()` or `Phone::from()`, passing the same enum cases. Persist `unmask()` as a string and use `mask()` for display
+- use `tryFrom()` for a nullable result, `isValid()` for a boolean, and `fake($type)` for tests. These APIs check structure and document check digits. Registry status and phone reachability require separate checks
+
 ## Rules, References, and Templates
 
 Read before executing:
@@ -50,6 +60,7 @@ Read before executing:
 - `https://atb.dev.br/packages/core/conditional-arrays/`
 - `https://atb.dev.br/packages/core/translated-attributes/`
 - `https://atb.dev.br/packages/core/multi-domain-inertia/`
+- `https://atb.dev.br/docs/core/brazilian-values`
 
 ## Example
 
@@ -80,6 +91,28 @@ class Plan extends Model
     }
 }
 ```
+
+In a form request for a company contact, restrict the tax ID to CNPJ and accept
+either a landline or mobile number with DDD.
+
+```php
+use ArtisanToolbox\Core\Brasilian\DocumentType;
+use ArtisanToolbox\Core\Brasilian\PhoneType;
+use ArtisanToolbox\Core\Brasilian\Rules\DocumentRule;
+use ArtisanToolbox\Core\Brasilian\Rules\PhoneRule;
+
+return [
+    'tax_id' => ['required', new DocumentRule(DocumentType::Cnpj)],
+    'contact_phone' => [
+        'required',
+        new PhoneRule(PhoneType::RegionalLandline, PhoneType::RegionalMobile),
+    ],
+];
+```
+
+`12.ABC.345/01DE-35` and `(11) 98765-4321` pass. The validated input retains its
+original format. Call `Document::from($value)->unmask()` or
+`Phone::from($value)->unmask()` to get the storage string.
 
 ## Anti-patterns
 
